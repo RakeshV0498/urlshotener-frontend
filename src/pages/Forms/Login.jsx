@@ -29,7 +29,6 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     localStorage.clear();
-    console.log(loginData);
     try {
       const response = await userLogin(loginData);
       if (response.code === 1) {
