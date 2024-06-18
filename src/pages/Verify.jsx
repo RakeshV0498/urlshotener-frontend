@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
@@ -12,13 +13,15 @@ const Verify = () => {
   const [verificationSuccess, setVerificationSuccess] = useState(false);
 
   useEffect(() => {
-    console.log("Verification Token:", verificationToken);
     const verifyEmail = async () => {
+      if (!verificationToken) return;
       try {
         const response = await userVerify(verificationToken);
-        console.log("Verification API Response:", response);
         setVerificationMessage(response.msg);
         setVerificationSuccess(true);
+        setTimeout(() => {
+          navigate("/login");
+        }, 5000);
       } catch (error) {
         console.error("Error verifying email:", error);
         setVerificationMessage("An error occurred while verifying your email");
@@ -26,10 +29,8 @@ const Verify = () => {
       }
     };
 
-    if (verificationToken) {
-      verifyEmail();
-    }
-  }, [verificationToken]);
+    verifyEmail();
+  }, []);
 
   return (
     <Container

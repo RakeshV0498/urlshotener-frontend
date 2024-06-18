@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Container from "react-bootstrap/Container";
 import { FaEnvelope, FaLock, FaUser } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useState } from "react";
 import { userSignup } from "../../apis/register";
@@ -15,6 +15,8 @@ function Register() {
     lastName: "",
     password: "",
   };
+
+  const navigate = useNavigate();
 
   const [userData, setUserData] = useState(initialData);
   const [message, setMessage] = useState("");
@@ -34,6 +36,9 @@ function Register() {
       if (response && response.msg) {
         setMessage(response.msg);
         setIsError(false);
+        setTimeout(() => {
+          navigate("/");
+        }, 5000);
       } else {
         throw new Error("Unknown error occurred");
       }

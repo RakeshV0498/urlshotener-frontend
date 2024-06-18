@@ -14,7 +14,7 @@ export const userSignup = async (userData) => {
 export const userVerify = async (verificationToken) => {
   try {
     const response = await axios.get(
-      `${backendURL}verify-email/${verificationToken}`
+      `${backendURL}register/verify-email/${verificationToken}`
     );
     return await response.data;
   } catch (error) {
