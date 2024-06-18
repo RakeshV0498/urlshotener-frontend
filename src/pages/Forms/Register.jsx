@@ -26,24 +26,25 @@ function Register() {
     setUserData({ ...userData, [name]: value });
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(userData);
 
-  //   try {
-  //     const response = await userSignup(userData);
-  //     if (response && response.msg) {
-  //       setMessage(response.msg);
-  //       setIsError(false);
-  //       navigate("/login");
-  //     } else {
-  //       throw new Error("Unknown error occurred");
-  //     }
-  //   } catch (error) {
-  //     setMessage("Error registering user");
-  //     setIsError(true);
-  //     console.error(error);
-  //   }
-  // };
+    // try {
+    //   const response = await userSignup(userData);
+    //   if (response && response.msg) {
+    //     setMessage(response.msg);
+    //     setIsError(false);
+    //     navigate("/login");
+    //   } else {
+    //     throw new Error("Unknown error occurred");
+    //   }
+    // } catch (error) {
+    //   setMessage("Error registering user");
+    //   setIsError(true);
+    //   console.error(error);
+    // }
+  };
 
   return (
     <Container
@@ -75,7 +76,7 @@ function Register() {
               />
             </InputGroup>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicName">
+          <Form.Group className="mb-3">
             <InputGroup>
               <InputGroup.Text>
                 <FaUser />

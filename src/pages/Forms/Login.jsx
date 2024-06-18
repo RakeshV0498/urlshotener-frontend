@@ -26,22 +26,22 @@ function Login() {
     setLoginData({ ...loginData, [name]: value });
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   localStorage.clear();
-  //   console.log(loginData);
-  //   try {
-  //     const response = await userLogin(loginData);
-  //     if (response.code === 1) {
-  //       localStorage.setItem("Authenticated", true);
-  //       localStorage.setItem("tokem", response.user);
-  //     }
-  //   } catch (error) {
-  //     return setMessage("Error logging in. Please check your credentials.");
-  //   }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    localStorage.clear();
+    console.log(loginData);
+    // try {
+    //   const response = await userLogin(loginData);
+    //   if (response.code === 1) {
+    //     localStorage.setItem("Authenticated", true);
+    //     localStorage.setItem("tokem", response.user);
+    //   }
+    // } catch (error) {
+    //   return setMessage("Error logging in. Please check your credentials.");
+    // }
 
-  //   setLoginData(initialData);
-  // };
+    // setLoginData(initialData);
+  };
 
   if (isAuthenticated) {
     return navigate("/");
