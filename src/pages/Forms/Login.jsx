@@ -36,7 +36,9 @@ function Login() {
         localStorage.setItem("token", response.user);
       }
     } catch (error) {
-      return setMessage("Error logging in. Please check your credentials.");
+      return setMessage(
+        error?.response?.data?.msg || "Something went wrong, try again later"
+      );
     }
 
     setLoginData(initialData);
