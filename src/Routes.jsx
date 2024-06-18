@@ -6,6 +6,7 @@ import NoMatch from "./pages/NoMatch";
 import Home from "./pages/Home";
 import Login from "./pages/Forms/Login";
 import Register from "./pages/Forms/Register";
+import Verify from "./pages/Verify";
 
 const AppRoutes = () => {
   return (
@@ -15,6 +16,7 @@ const AppRoutes = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/account-verify" element={<Verify />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
       <Footer />
