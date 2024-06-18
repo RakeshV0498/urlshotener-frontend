@@ -1,8 +1,8 @@
 import { useState } from "react";
-import axios from "axios";
 import { Container, Row, Col, Form, Button, InputGroup } from "react-bootstrap";
 import { FaLink } from "react-icons/fa";
 import { backendURL } from "../../apis/constants";
+import { urlShorten } from "../../apis/urlAPI";
 
 const URLShortenerPage = () => {
   const [longURL, setLongURL] = useState("");
@@ -12,10 +12,8 @@ const URLShortenerPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8100/urls/shorten", {
-        longURL,
-      });
-      setShortURL(response.data.shortURL);
+      const response = await urlShorten({ longURL });
+      setShortURL(response.shortURL);
       setMessage("");
     } catch (error) {
       setMessage("Error creating short URL");
