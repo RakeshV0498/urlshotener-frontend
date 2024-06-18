@@ -25,7 +25,7 @@ const Home = () => {
             size="lg"
             className="mt-3"
             onClick={() => {
-              navigate("/shortener");
+              navigate("/url-shortener");
             }}
           >
             Get Started <FaArrowRight className="ml-2" />
