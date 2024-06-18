@@ -4,7 +4,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Container from "react-bootstrap/Container";
 import { FaEnvelope, FaLock, FaUser } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { userSignup } from "../../Apis/register";
+// import { userSignup } from "../../Apis/register";
 import { useState } from "react";
 
 function Register() {
@@ -26,24 +26,24 @@ function Register() {
     setUserData({ ...userData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
 
-    try {
-      const response = await userSignup(userData);
-      if (response && response.msg) {
-        setMessage(response.msg);
-        setIsError(false);
-        navigate("/login");
-      } else {
-        throw new Error("Unknown error occurred");
-      }
-    } catch (error) {
-      setMessage("Error registering user");
-      setIsError(true);
-      console.error(error);
-    }
-  };
+  //   try {
+  //     const response = await userSignup(userData);
+  //     if (response && response.msg) {
+  //       setMessage(response.msg);
+  //       setIsError(false);
+  //       navigate("/login");
+  //     } else {
+  //       throw new Error("Unknown error occurred");
+  //     }
+  //   } catch (error) {
+  //     setMessage("Error registering user");
+  //     setIsError(true);
+  //     console.error(error);
+  //   }
+  // };
 
   return (
     <Container
