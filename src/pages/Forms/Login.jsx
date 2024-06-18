@@ -6,7 +6,7 @@ import { FaEnvelope, FaLock } from "react-icons/fa";
 import Container from "react-bootstrap/Container";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-// import { userLogin } from "../../Apis/login";
+import { userLogin } from "../../apis/login";
 
 function Login() {
   const isAuthenticated = Boolean(localStorage.getItem("Authenticated"));
@@ -30,17 +30,17 @@ function Login() {
     e.preventDefault();
     localStorage.clear();
     console.log(loginData);
-    // try {
-    //   const response = await userLogin(loginData);
-    //   if (response.code === 1) {
-    //     localStorage.setItem("Authenticated", true);
-    //     localStorage.setItem("tokem", response.user);
-    //   }
-    // } catch (error) {
-    //   return setMessage("Error logging in. Please check your credentials.");
-    // }
+    try {
+      const response = await userLogin(loginData);
+      if (response.code === 1) {
+        localStorage.setItem("Authenticated", true);
+        localStorage.setItem("token", response.user);
+      }
+    } catch (error) {
+      return setMessage("Error logging in. Please check your credentials.");
+    }
 
-    // setLoginData(initialData);
+    setLoginData(initialData);
   };
 
   if (isAuthenticated) {
