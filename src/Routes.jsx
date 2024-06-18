@@ -16,7 +16,7 @@ const AppRoutes = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/account-verify" element={<Verify />} />
+        <Route path="/verify-email/:verificationToken" element={<Verify />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
       <Footer />

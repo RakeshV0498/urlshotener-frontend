@@ -10,3 +10,15 @@ export const userSignup = async (userData) => {
     throw error;
   }
 };
+
+export const userVerify = async (verificationToken) => {
+  try {
+    const response = await axios.get(
+      `${backendURL}verify-email/${verificationToken}`
+    );
+    return await response.data;
+  } catch (error) {
+    console.error("Error verifying email:", error);
+    throw error;
+  }
+};

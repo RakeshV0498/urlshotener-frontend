@@ -1,9 +1,32 @@
+import { useEffect, useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { FaCheckCircle } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { userVerify } from "../apis/register";
 
 const Verify = () => {
   const navigate = useNavigate();
+
+  const { verificationToken } = useParams();
+  const [verificationMessage, setVerificationMessage] = useState("");
+
+  useEffect(() => {
+    console.log("Verification Token:", verificationToken); // Check if the token is extracted correctly
+    const verifyEmail = async () => {
+      try {
+        const response = await userVerify(verificationToken);
+        console.log("Verification API Response:", response); // Check the response from the API
+        setVerificationMessage(response.msg);
+      } catch (error) {
+        console.error("Error verifying email:", error); // Log any errors that occur during the API call
+        setVerificationMessage("An error occurred while verifying your email");
+      }
+    };
+
+    if (verificationToken) {
+      verifyEmail();
+    }
+  }, [verificationToken]);
 
   return (
     <Container
@@ -15,6 +38,7 @@ const Verify = () => {
           <FaCheckCircle size={100} color="green" className="mb-4" />
           <h2>User Verified</h2>
           <p>Your account has been successfully verified.</p>
+          <p>{verificationMessage}</p>
           <Button
             variant="primary"
             size="lg"
