@@ -194,7 +194,7 @@ const Dashboard = () => {
             URL Shortener
           </Button>
           <Button variant="primary" onClick={() => navigate("/urlTable")}>
-            Daily Data Table
+            View URL Table
           </Button>
         </Col>
       </Row>
