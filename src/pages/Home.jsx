@@ -31,7 +31,7 @@ const Home = () => {
       }}
     >
       <Row className="align-items-center">
-        <Col md={6}>
+        <Col md={6} className="order-md-1 mb-4">
           <h1 style={{ fontSize: "2.5rem", marginBottom: "20px" }}>
             Welcome to Our URL Shortener
           </h1>
@@ -89,7 +89,7 @@ const Home = () => {
             </Button>
           )}
         </Col>
-        <Col md={6}>
+        <Col md={6} className="order-md-2">
           <Image
             src={heroImg}
             alt="URL Shortener"
