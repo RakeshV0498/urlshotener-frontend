@@ -1,0 +1,29 @@
+{
+  "name": "URL Shortener",
+  "short_name": "Shortener",
+  "description": "A URL shortening service",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#007bff",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "./icon192.jpg",
+      "type": "image/jpg",
+      "sizes": "192x192"
+    },
+    {
+      "src": "./icon512.jpg",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "splash_pages": null,
+  "permissions": [],
+  "serviceworker": {
+    "src": "/service-worker.js",
+    "scope": "/"
+  },
+  "related_applications": [],
+  "prefer_related_applications": false
+}
