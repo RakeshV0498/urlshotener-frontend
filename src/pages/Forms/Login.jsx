@@ -5,12 +5,10 @@ import Form from "react-bootstrap/Form";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import Container from "react-bootstrap/Container";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { userLogin } from "../../apis/login";
 
 function Login() {
-  const isAuthenticated = Boolean(localStorage.getItem("Authenticated"));
-
   const navigate = useNavigate();
 
   const initialData = {
@@ -20,6 +18,14 @@ function Login() {
 
   const [loginData, setLoginData] = useState(initialData);
   const [message, setMessage] = useState("");
+
+  // Check authentication status and redirect if authenticated
+  useEffect(() => {
+    const isAuthenticated = Boolean(localStorage.getItem("Authenticated"));
+    if (isAuthenticated) {
+      navigate("/"); // Redirect to home page if already authenticated
+    }
+  }, [navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,21 +38,18 @@ function Login() {
     try {
       const response = await userLogin(loginData);
       if (response.code === 1) {
-        localStorage.setItem("Authenticated", true);
+        localStorage.setItem("Authenticated", "true");
         localStorage.setItem("token", response.user);
+        navigate("/"); // Navigate to home page after successful login
+      } else {
+        setMessage(response.message || "Login failed");
       }
     } catch (error) {
-      return setMessage(
+      setMessage(
         error?.response?.data?.msg || "Something went wrong, try again later"
       );
     }
-
-    setLoginData(initialData);
   };
-
-  if (isAuthenticated) {
-    return navigate("/");
-  }
 
   return (
     <Container
