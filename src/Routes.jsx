@@ -11,6 +11,8 @@ import ForgotPassword from "./pages/Forms/ForgotPassword";
 import PasswordReset from "./pages/Forms/ResetPassword";
 import URLShortenerPage from "./pages/urlShortner/URLShortner";
 import ProtectedRoute from "./ProtectedRoute";
+import Dashboard from "./pages/urlShortner/Dashboard";
+import URLTable from "./pages/urlShortner/URLTable";
 
 const AppRoutes = () => {
   return (
@@ -27,6 +29,8 @@ const AppRoutes = () => {
           path="/url-shortener"
           element={<ProtectedRoute component={<URLShortenerPage />} />}
         />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/urlTable" element={<URLTable />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
       <Footer />
