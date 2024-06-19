@@ -11,9 +11,9 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import axios from "axios";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Spinner, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { getDailyCount, getMonthlyCount } from "../../apis/analytics.js";
 
 // Register the necessary components
 ChartJS.register(
@@ -30,28 +30,23 @@ ChartJS.register(
 const Dashboard = () => {
   const [dailyData, setDailyData] = useState([]);
   const [monthlyData, setMonthlyData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       const token = localStorage.getItem("token");
       try {
-        const dailyResponse = await axios.get(
-          "http://localhost:8100/analytics/daily-count",
-          {
-            headers: { Authorization: token },
-          }
-        );
-        const monthlyResponse = await axios.get(
-          "http://localhost:8100/analytics/monthly-count",
-          {
-            headers: { Authorization: token },
-          }
-        );
-        setDailyData(dailyResponse.data);
-        setMonthlyData(monthlyResponse.data);
+        const dailyData = await getDailyCount(token);
+        const monthlyData = await getMonthlyCount(token);
+        setDailyData(dailyData);
+        setMonthlyData(monthlyData);
       } catch (error) {
         console.error("Error fetching data:", error);
+        setError("Failed to fetch data. Please try again later.");
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
@@ -159,6 +154,36 @@ const Dashboard = () => {
     },
     maintainAspectRatio: false,
   };
+
+  if (loading) {
+    return (
+      <Container
+        className="d-flex flex-column justify-content-center align-items-center"
+        style={{ minHeight: "100vh" }}
+      >
+        <Spinner animation="border" role="status" className="mb-3">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+        <p>Loading dashboard data, please wait...</p>
+      </Container>
+    );
+  }
+
+  if (error) {
+    return (
+      <Container className="my-5">
+        <Alert variant="danger">{error}</Alert>
+        <div className="d-flex justify-content-between mb-4">
+          <Button variant="primary" onClick={() => navigate("/url-shortener")}>
+            URL Shortener
+          </Button>
+          <Button variant="primary" onClick={() => navigate("/urlTable")}>
+            Daily Data Table
+          </Button>
+        </div>
+      </Container>
+    );
+  }
 
   return (
     <Container className="my-5">
