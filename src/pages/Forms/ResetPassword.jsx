@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { FaLock } from "react-icons/fa";
+import Alert from "react-bootstrap/Alert";
+import { FaLock, FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
 import { resetPassword } from "../../apis/resetPassword.js";
 import PropTypes from "prop-types";
 import { useNavigate, useParams } from "react-router-dom";
@@ -53,7 +54,7 @@ function PasswordReset() {
     if (successMessage) {
       const timer = setTimeout(() => {
         navigate("/login");
-      }, 5000); // Navigate to login after 3 seconds
+      }, 5000); // Navigate to login after 5 seconds
 
       return () => clearTimeout(timer); // Clear the timer on component unmount
     }
@@ -96,15 +97,28 @@ function PasswordReset() {
               required
             />
           </div>
-          {validationError && <p className="text-danger">{validationError}</p>}
+          {validationError && (
+            <Alert variant="danger" className="mt-2">
+              <FaExclamationCircle className="mr-1" />
+              {validationError}
+            </Alert>
+          )}
         </Form.Group>
         <Button variant="primary" type="submit" className="mt-3">
           Reset
         </Button>
         {successMessage && (
-          <p className="text-success mt-2">{successMessage}</p>
+          <Alert variant="success" className="mt-2">
+            <FaCheckCircle className="mr-1" />
+            {successMessage}
+          </Alert>
         )}
-        {errorMessage && <p className="text-danger mt-2">{errorMessage}</p>}
+        {errorMessage && (
+          <Alert variant="danger" className="mt-2">
+            <FaExclamationCircle className="mr-1" />
+            {errorMessage}
+          </Alert>
+        )}
       </Form>
     </div>
   );
